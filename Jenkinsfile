@@ -19,7 +19,8 @@ pipeline {
         }
         stage('Cleanup') {
             steps {
-                //sh "rm -Rf ${env.WORKSPACE}"
+              echo "Cleanup goes here..."
+              //sh "rm -Rf ${env.WORKSPACE}"
             }
         }
     }
