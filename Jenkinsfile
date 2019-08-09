@@ -4,12 +4,12 @@ pipeline {
     stages {
         stage('Install Terraform') {
             steps {
-                sh "scripts/install_terraform.sh '0.12.6'"
+                sh "${env.WORKSPACE}/scripts/install_terraform.sh '0.12.6'"
             }
         }
         stage('Validate') {
             steps {
-                sh "cd terraform"
+                sh "cd ${env.WORKSPACE}/terraform"
                 sh "terraform init"
                 sh "terraform fmt"
                 sh "terraform validate"
