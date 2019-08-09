@@ -10,15 +10,20 @@ pipeline {
                 echo "Dir is: ${env.WORKSPACE}/terraform"
                 sh "ls -lah ${env.WORKSPACE}/terraform"
                 sh "cat ${env.WORKSPACE}/terraform/main.tf"
+                dir("${env.WORKSPACE}/terraform") {
+                  sh "terraform init"
+                  sh "terraform fmt"
+                  sh "terraform validate"
+                }
 
                 // Try to invoke the shared library
-                terraform.init {
-                  dir = "${env.WORKSPACE}/terraform"
-                }
+                //terraform.init {
+                //  dir = "${env.WORKSPACE}/terraform"
+                //}
 
-                terraform.validate {
-                  dir = "${env.WORKSPACE}/terraform"
-                }
+                //terraform.validate {
+                //  dir = "${env.WORKSPACE}/terraform"
+                //}
               }
             }
         }
