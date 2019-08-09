@@ -1,0 +1,16 @@
+---
+
+terraform:
+  owner: "PSO Team"
+  extensions:
+    - tf
+
+project/one:
+  owner: "Project one team"
+  extensions:
+    - tf
+
+project/intermediate/two:
+  owner: "Project two team"
+  extensions:
+    - tf
