@@ -9,6 +9,7 @@ pipeline {
               script {
                 echo "Dir is: ${env.WORKSPACE}/terraform"
                 sh "ls -lah ${env.WORKSPACE}/terraform"
+                sh "cat ${env.WORKSPACE}/terraform/main.tf"
                 terraform.init {
                   dir = "${env.WORKSPACE}/terraform"
                 }
