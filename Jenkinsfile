@@ -4,6 +4,8 @@ pipeline {
     stages {
         stage('Build') {
             steps {
+                echo "Workspace is: ${env.WORKSPACE}"
+                echo "ENV is: ${env}"
                 echo 'Building..'
             }
         }
