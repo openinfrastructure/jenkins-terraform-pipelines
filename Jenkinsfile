@@ -1,18 +1,23 @@
+@Library('github.com/mschuchard/jenkins-devops-libs@1.3.0')_
+
 pipeline {
     agent any
 
     stages {
        stage('Validate') {
             steps {
-                sh "cd ${env.WORKSPACE}/terraform"
-                sh "terraform init"
-                sh "terraform fmt"
-                sh "terraform validate"
+                terraform.init {
+                  dir = "${env.WORKSPACE}/terraform"
+                }
+
+                terraform.validate {
+                  dir = "${env.WORKSPACE}/terraform"
+                }
             }
         }
-        stage('Deploy') {
+        stage('Cleanup') {
             steps {
-                echo 'Deploying....'
+                //sh "rm -Rf ${env.WORKSPACE}"
             }
         }
     }
