@@ -7,6 +7,7 @@ pipeline {
        stage('Validate') {
             steps {
               script {
+                echo "Dir is: ${env.WORKSPACE}/terraform"
                 terraform.init {
                   dir = "${env.WORKSPACE}/terraform"
                 }
