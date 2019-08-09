@@ -12,9 +12,9 @@ pipeline {
                 sh "cat ${env.WORKSPACE}/terraform/main.tf"
 
                 // Try to invoke the shared library
-                //terraform.init {
-                //  dir = "${env.WORKSPACE}/terraform"
-                //}
+                terraform.init {
+                  dir = "${env.WORKSPACE}/terraform"
+                }
 
                 terraform.validate {
                   dir = "${env.WORKSPACE}/terraform"
