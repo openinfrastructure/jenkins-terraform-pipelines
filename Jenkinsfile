@@ -6,7 +6,8 @@ pipeline {
             steps {
                 echo "Workspace is: ${env.WORKSPACE}"
                 echo "ENV is: ${env}"
-                echo 'Building..'
+                sh 'ls -lah'
+                sh 'cat Jenkinsfile'
             }
         }
         stage('Test') {
