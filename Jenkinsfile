@@ -6,6 +6,7 @@ pipeline {
     stages {
        stage('Validate') {
             steps {
+              script {
                 terraform.init {
                   dir = "${env.WORKSPACE}/terraform"
                 }
@@ -13,6 +14,7 @@ pipeline {
                 terraform.validate {
                   dir = "${env.WORKSPACE}/terraform"
                 }
+              }
             }
         }
         stage('Cleanup') {
