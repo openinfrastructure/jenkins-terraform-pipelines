@@ -1,4 +1,4 @@
-@Library('github.com/mschuchard/jenkins-devops-libs@v1.2.0')_
+@Library('github.com/mschuchard/jenkins-devops-libs@v1.2.1')_
 
 pipeline {
     agent any
