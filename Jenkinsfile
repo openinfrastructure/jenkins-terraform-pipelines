@@ -2,17 +2,17 @@ pipeline {
     agent any
 
     stages {
-        stage('Build') {
+        stage('Install Terraform') {
             steps {
-                echo "Workspace is: ${env.WORKSPACE}"
-                echo "ENV is: ${env}"
-                sh 'ls -lah'
-                sh 'cat Jenkinsfile'
+                sh "scripts/install_terraform.sh '0.12.6'"
             }
         }
-        stage('Test') {
+        stage('Validate') {
             steps {
-                echo 'Testing..'
+                sh "cd terraform"
+                sh "terraform init"
+                sh "terraform fmt"
+                sh "terraform validate"
             }
         }
         stage('Deploy') {
