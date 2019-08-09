@@ -4,6 +4,7 @@ pipeline {
     stages {
         stage('Install Terraform') {
             steps {
+                sh "ls -lah ${env.WORKSPACE}/scripts"
                 sh "${env.WORKSPACE}/scripts/install_terraform.sh '0.12.6'"
             }
         }
