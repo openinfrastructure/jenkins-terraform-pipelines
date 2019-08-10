@@ -14,6 +14,7 @@ pipeline {
                   sh "terraform init"
                   sh "terraform fmt"
                   sh "terraform validate"
+                  def comment = pullRequest.comment('This PR is highly illogical..')
                 }
 
                 // Try to invoke the shared library
