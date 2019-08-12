@@ -22,16 +22,11 @@ pipeline {
                 echo "Dir is: ${env.WORKSPACE}/terraform"
                 sh "ls -lah ${env.WORKSPACE}/terraform"
                 sh "cat ${env.WORKSPACE}/terraform/main.tf"
-                dir("${env.WORKSPACE}/terraform") {
-                  sh "terraform init"
-                  sh "terraform fmt"
-                  sh "terraform validate"
-
-                  // setBuildStatus("Complete","SUCCESS", "Terraform tests","${gitCommit}")
-                  if (env.CHANGE_ID) {
-                    def comment = pullRequest.comment('Validation successful...')
-                  }
-                }
+                //dir("${env.WORKSPACE}/terraform") {
+                //  sh "terraform init"
+                //  sh "terraform fmt"
+                //  sh "terraform validate"
+                //}
 
                 // Try to invoke the shared library
                 terraform.init {
