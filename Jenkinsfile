@@ -22,6 +22,8 @@ pipeline {
                 echo "Dir is: ${env.WORKSPACE}/terraform"
                 sh "ls -lah ${env.WORKSPACE}/terraform"
                 sh "cat ${env.WORKSPACE}/terraform/main.tf"
+
+                setBuildStatus("Complete","SUCCESS", "Terraform tests","${env.GIT_COMMIT}")
                 //dir("${env.WORKSPACE}/terraform") {
                 //  sh "terraform init"
                 //  sh "terraform fmt"
