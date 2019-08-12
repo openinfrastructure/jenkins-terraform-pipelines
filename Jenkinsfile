@@ -23,7 +23,9 @@ pipeline {
                 sh "ls -lah ${env.WORKSPACE}/terraform"
                 sh "cat ${env.WORKSPACE}/terraform/main.tf"
 
-                setBuildStatus("Complete","SUCCESS", "Terraform tests","${env.GIT_COMMIT}")
+                setBuildStatus("In Progress","PENDING", "Terraform testing pipeline","${env.GIT_COMMIT}")
+                sh "sleep 20"
+                setBuildStatus("Complete","SUCCESS", "Terraform testing pipeline","${env.GIT_COMMIT}")
                 //dir("${env.WORKSPACE}/terraform") {
                 //  sh "terraform init"
                 //  sh "terraform fmt"
