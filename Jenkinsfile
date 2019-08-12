@@ -28,14 +28,14 @@ pipeline {
                 //  sh "terraform validate"
                 //}
 
-                // Try to invoke the shared library
-                terraform.init {
-                  dir = "${env.WORKSPACE}/terraform"
-                }
+                //// Try to invoke the shared library
+                //terraform.init {
+                //  dir = "${env.WORKSPACE}/terraform"
+                //}
 
-                terraform.validate {
-                  dir = "${env.WORKSPACE}/terraform"
-                }
+                //terraform.validate {
+                //  dir = "${env.WORKSPACE}/terraform"
+                //}
               }
             }
         }
