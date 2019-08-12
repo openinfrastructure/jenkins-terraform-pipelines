@@ -27,7 +27,7 @@ pipeline {
                   sh "terraform fmt"
                   sh "terraform validate"
 
-                  setBuildStatus("Complete","SUCCESS", "Terraform tests","${gitCommit}")
+                  // setBuildStatus("Complete","SUCCESS", "Terraform tests","${gitCommit}")
                   if (env.CHANGE_ID) {
                     def comment = pullRequest.comment('Validation successful...')
                   }
