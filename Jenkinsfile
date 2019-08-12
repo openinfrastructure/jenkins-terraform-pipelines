@@ -23,9 +23,11 @@ pipeline {
                 sh "ls -lah ${env.WORKSPACE}/terraform"
                 sh "cat ${env.WORKSPACE}/terraform/main.tf"
 
+                // This demonstrates the use of the above setBuildStatus method for interacting
+                // with the Status API
                 setBuildStatus("In Progress","PENDING", "Terraform testing pipeline","${env.GIT_COMMIT}")
                 sh "sleep 20"
-                setBuildStatus("Complete","SUCCESS", "Terraform testing pipeline","${env.GIT_COMMIT}")
+
                 //dir("${env.WORKSPACE}/terraform") {
                 //  sh "terraform init"
                 //  sh "terraform fmt"
@@ -40,6 +42,7 @@ pipeline {
                 //terraform.validate {
                 //  dir = "${env.WORKSPACE}/terraform"
                 //}
+                setBuildStatus("Complete","SUCCESS", "Terraform testing pipeline","${env.GIT_COMMIT}")
               }
             }
         }
