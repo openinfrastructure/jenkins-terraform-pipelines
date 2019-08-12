@@ -3,7 +3,7 @@
 def setBuildStatus(String message, String state, String context, String sha) {
     step([
         $class: "GitHubCommitStatusSetter",
-        reposSource: [$class: "ManuallyEnteredRepositorySource", url: "https://github.com/glarizza/jenkins-integration-test"],
+        reposSource: [$class: "ManuallyEnteredRepositorySource", url: "https://github.com/openinfrastructure/jenkins-terraform-pipelines"],
         contextSource: [$class: "ManuallyEnteredCommitContextSource", context: context],
         errorHandlers: [[$class: "ChangingBuildStatusErrorHandler", result: "UNSTABLE"]],
         commitShaSource: [$class: "ManuallyEnteredShaSource", sha: sha ],
