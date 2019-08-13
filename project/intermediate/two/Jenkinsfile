@@ -27,7 +27,7 @@ pipeline {
                     dir = my_tf_dir
                   }
 
-                  pullRequest.comment("Output of plan:\n```\n${output}\n```")
+                  pullRequest.comment("Output of plan from job ${env.JOB_NAME} build ${env.BUILD_ID}:\n```\n${output}\n```")
               }
             }
         }
