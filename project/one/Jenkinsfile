@@ -26,8 +26,7 @@ pipeline {
                     dir = my_tf_dir
                   }
 
-                  def plan = readFile "${my_tf_dir}/plan.tfplan"
-                  def comment = pullRequest.comment("Output of plan:\n```\n${output}\n```")
+                  pullRequest.comment("Output of plan:\n```\n${output}\n```")
               }
             }
         }
