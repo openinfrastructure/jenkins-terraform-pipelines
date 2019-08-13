@@ -3,7 +3,7 @@
 pipeline {
     agent any
     environment {
-      TF_DIR = "${env.WORKSPACE}"
+      TF_DIR = "${env.WORKSPACE}/project/one"
     }
     stages {
        stage('Validate') {
