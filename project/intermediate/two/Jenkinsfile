@@ -12,6 +12,7 @@ pipeline {
                 echo "Dir is: ${TF_DIR}"
                 sh "ls -lah ${TF_DIR}"
                 sh "cat ${TF_DIR}/main.tf"
+                sh "env"
 
                 def my_tf_dir = TF_DIR
                   terraform.init {
