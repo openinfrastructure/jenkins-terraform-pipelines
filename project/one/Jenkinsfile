@@ -1,0 +1,40 @@
+@Library('github.com/glarizza/jenkins-devops-libs@gl/plan_stdout')_
+
+pipeline {
+    agent any
+    environment {
+      TF_DIR = "${env.WORKSPACE}/project/one"
+    }
+    stages {
+       stage('Validate') {
+            steps {
+              script {
+                echo "Dir is: ${TF_DIR}"
+                sh "ls -lah ${TF_DIR}"
+                sh "cat ${TF_DIR}/main.tf"
+
+                def my_tf_dir = TF_DIR
+                  terraform.init {
+                    dir = my_tf_dir
+                  }
+
+                  terraform.validate {
+                    dir = my_tf_dir
+                  }
+
+                  def output = terraform.plan {
+                    dir = my_tf_dir
+                  }
+
+                  pullRequest.comment("Output of plan:\n```\n${output}\n```")
+              }
+            }
+        }
+        stage('Cleanup') {
+            steps {
+              echo "Cleanup goes here..."
+              //sh "rm -Rf ${env.WORKSPACE}"
+            }
+        }
+    }
+}
