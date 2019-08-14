@@ -60,7 +60,7 @@ pipeline {
                   }
 
                   if (env.CHANGE_ID) {
-                    pullRequest.comment("Output of `terraform plan` within the repository's ${directory} directory initiated from Jenkins job '${env.JOB_NAME}' build ${env.BUILD_ID}:\n```\n${output}\n```")
+                    pullRequest.comment("Output of `terraform plan` within the repository's `${directory}` directory initiated from Jenkins job `${env.JOB_NAME}` build `${env.BUILD_ID}`:\n```\n${output}\n```")
                   }
                 }
               }
