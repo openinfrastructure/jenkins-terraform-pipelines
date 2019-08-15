@@ -1,4 +1,4 @@
-@Library('github.com/glarizza/jenkins-devops-libs@gl/fmt')_
+@Library('github.com/glarizza/jenkins-devops-libs@gl/fmt_and_plan_updates')_
 
 def getParentDirectoriesOfChangedFiles() {
   changedFiles = sh (
