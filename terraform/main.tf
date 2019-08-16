@@ -17,3 +17,4 @@ resource "google_compute_address" "external" {
 }
 
 # Comment to check the file
+# another comment
