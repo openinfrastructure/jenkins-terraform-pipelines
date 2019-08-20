@@ -15,3 +15,5 @@ resource "google_compute_address" "external" {
   region       = "us-west1"
   address_type = "EXTERNAL"
 }
+
+## Adding a comment here

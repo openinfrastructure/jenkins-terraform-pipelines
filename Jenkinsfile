@@ -16,6 +16,15 @@ def getParentDirectoriesOfChangedFiles() {
   return list.unique()
 }
 
+def readTerraformMappingsFile(mappingsFilePath) {
+  if(fileExists(mappingsFilePath)) {
+    def terraformDirectoryMap = readYaml file: mappingsFilePath
+    return terraformDirectoryMap
+  } else {
+    error("Error: Could not find Terraform directory mapping file at ${mappingsFilePath}.")
+  }
+}
+
 pipeline {
     agent any
     environment {
@@ -34,13 +43,13 @@ pipeline {
             // PR. If a file has been changed within a known terraform
             // implementation directory then validate and plan that directory.
             def terraformDirectoriesToValidate = []
-            terraformDirectoryMap = readYaml file: "${env.WORKSPACE}/terraform-directory-mappings.yaml"
-            terraformDirectories = terraformDirectoryMap.keySet()
-            changedDirectories = getParentDirectoriesOfChangedFiles()
-            changedDirectories.each {
+            terraformDirectoryMap = readTerraformMappingsFile("${env.WORKSPACE}/terraform-directory-mappings.yaml")
+            terraformDirectoriesList = terraformDirectoryMap.keySet()
+            changedDirectoriesList = getParentDirectoriesOfChangedFiles()
+            changedDirectoriesList.each {
               println "Looping through parent directories of changed files. Now checking: ${it}"
-              if (terraformDirectories.contains(it)) {
-                println "Found ${it} in ${terraformDirectories}"
+              if (terraformDirectoriesList.contains(it)) {
+                println "Found ${it} in ${terraformDirectoriesList}"
                 terraformDirectoriesToValidate.add(it)
               }
             }
@@ -60,7 +69,7 @@ pipeline {
                   }
 
                   if (env.CHANGE_ID) {
-                    pullRequest.comment("Output of `terraform plan` within the repository's ${directory} directory initiated from Jenkins job '${env.JOB_NAME}' build ${env.BUILD_ID}:\n```\n${output}\n```")
+                    pullRequest.comment("Output of `terraform plan` within the repository's `${directory}` directory initiated from Jenkins job `${env.JOB_NAME}` build `${env.BUILD_ID}`:\n```\n${output}\n```")
                   }
                 }
               }
