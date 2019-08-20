@@ -1,4 +1,4 @@
-@Library('github.com/glarizza/jenkins-devops-libs@gl/plan_stdout')_
+@Library('github.com/glarizza/jenkins-devops-libs@gl/fmt_and_plan_updates')_
 
 def getParentDirectoriesOfChangedFiles() {
   changedFiles = sh (
@@ -56,6 +56,12 @@ pipeline {
             terraformDirectoriesToValidate.each { directory ->
               node {
                 stage("Validate ${directory} directory") {
+                  terraform.fmt {
+                    dir   = "${localWorkspacePath}/${directory}"
+                    check = true
+                    diff  = true
+                  }
+
                   terraform.init {
                     dir = "${localWorkspacePath}/${directory}"
                   }
