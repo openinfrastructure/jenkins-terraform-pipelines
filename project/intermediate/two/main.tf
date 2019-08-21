@@ -16,4 +16,3 @@ resource "google_compute_address" "external" {
   address_type = "EXTERNAL"
 }
 
-## Adding a comment
