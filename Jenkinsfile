@@ -54,9 +54,6 @@ def getTerraformRootDirectory(changedFilesList, terraformDirectoriesList) {
 
 pipeline {
     agent any
-    environment {
-      TF_DIR = "${env.WORKSPACE}/terraform"
-    }
     stages {
       stage('Determine Terraform Directories') {
         steps {
