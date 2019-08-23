@@ -18,16 +18,17 @@ def getChangedFiles() {
 
 def readTerraformMappingsFile(mappingsFilePath) {
   /* Read a YAML file of managed terraform implementation directories and
-     return a map of that file's contents.
+     return a list of that file's contents.
 
      Arguments:
        mappingsFilePath: The path to the YAML mapping file
 
-     Returns: A map of the YAML file with each directory being a key in the map
+     Returns: A list containing the relative paths to all the terraform
+      implementation directories within the repository
   */
   if(fileExists(mappingsFilePath)) {
-    def terraformDirectoryMap = readYaml file: mappingsFilePath
-    return terraformDirectoryMap
+    def terraformDirectoryList = readYaml file: mappingsFilePath
+    return terraformDirectoryList
   } else {
     error("Error: Could not find Terraform directory mapping file at ${mappingsFilePath}.")
   }
@@ -131,8 +132,7 @@ pipeline {
       steps {
         script {
           dir(GIT_ROOT) {
-            def terraformDirectoryMap = readTerraformMappingsFile("${env.WORKSPACE}/terraform-directory-mappings.yaml")
-            def terraformDirectoriesList = terraformDirectoryMap.keySet()
+            def terraformDirectoriesList = readTerraformMappingsFile("${env.WORKSPACE}/.terraform_directories.yaml")
             def changedFilesList = getChangedFiles()
             // terraformRootDirectory is accessed in a later stage, so don't use "def" to
             // define it (which makes it local in scope)
